@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/BeanBoxExtension.iml" filepath="$PROJECT_DIR$/BeanBoxExtension.iml" />
+      <module fileurl="file://C:\Users\Elisabeth\IdeaProjects\BeanBoxIntelliJ\Test\Test.iml" filepath="C:\Users\Elisabeth\IdeaProjects\BeanBoxIntelliJ\Test\Test.iml" />
+      <module fileurl="file://C:\Users\Elisabeth\IdeaProjects\BeanBoxIntelliJ\TestBeans\TestBeans.iml" filepath="C:\Users\Elisabeth\IdeaProjects\BeanBoxIntelliJ\TestBeans\TestBeans.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../exercise3/src/main/main.iml" filepath="$PROJECT_DIR$/../exercise3/src/main/main.iml" />
+    </modules>
+  </component>
+</project>
