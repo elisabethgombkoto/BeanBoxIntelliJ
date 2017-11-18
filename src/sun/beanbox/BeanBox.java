@@ -6,7 +6,7 @@ package sun.beanbox;
  * implements the various bean APIs.  Second, it provides a reference example
  * container that can be copied and modified freely.
  * <p>
- * The BeanBox allows beans to be manipulated visually.  You can use the
+ * The BeanBox allows imageFilters to be manipulated visually.  You can use the
  * associated property sheet to edit the exposed properties, you can use the
  * edit/events menu to connect events from am event source to an event sink,
  * or you can use the edit/customize menu to test a customizer.
@@ -457,7 +457,7 @@ public class BeanBox extends Panel implements Serializable, Runnable,
                     File.separatorChar, '/'));
             ObjectInputStream ois = new ObjectInputStreamLoader(is, cl);
 
-            // Read all the contained beans into this BeanBox.
+            // Read all the contained imageFilters into this BeanBox.
             readContents(ois);
 
         } catch (Throwable th) {
@@ -470,7 +470,7 @@ public class BeanBox extends Panel implements Serializable, Runnable,
     /**
      * Andreas Erlschweiger 2017
      *
-     * Sets a flag that signals that the user wants to select the beans for exporting.
+     * Sets a flag that signals that the user wants to select the imageFilters for exporting.
      */
     private void export() {
         exporting = true;
@@ -479,7 +479,7 @@ public class BeanBox extends Panel implements Serializable, Runnable,
     /**
      * Andreas Ertlschweiger 2017
      *
-     * Initiates the exporting process. Returns if no beans have been selected.
+     * Initiates the exporting process. Returns if no imageFilters have been selected.
      * This method also opens an Error Dialog if any exceptions is thrown while setting up the Exporter.
      */
     private void finishExport() {
@@ -565,7 +565,7 @@ public class BeanBox extends Panel implements Serializable, Runnable,
         int count = getComponentCount();
 
         if (HookupManager.useEventAdapter)  {  //hv2016
-            // We unhook all the event wiring from the beans while
+            // We unhook all the event wiring from the imageFilters while
             // they are being written out.
             for (int i = 0; i < count; i++) {
                 Wrapper w = (Wrapper) getComponent(i);
@@ -610,7 +610,7 @@ public class BeanBox extends Panel implements Serializable, Runnable,
         for (int i = 0; i < count; i++) {
             Component c = (Component) ois.readObject();
             Wrapper w = (Wrapper) c;
-            w.setFromPrototype(true); // treat saved beans as if they had
+            w.setFromPrototype(true); // treat saved imageFilters as if they had
             // hidden state.
 
             Object bean = w.getBean();
@@ -711,7 +711,7 @@ public class BeanBox extends Panel implements Serializable, Runnable,
      * This implements the "loadJar" menu item. Load the contents of a JAR file
      */
     private void loadJar() {
-        FileDialog fd = new FileDialog(getFrame(), "Load beans from JAR File",
+        FileDialog fd = new FileDialog(getFrame(), "Load imageFilters from JAR File",
                 FileDialog.LOAD);
         // the setDirectory() is not needed, except for a bug under Solaris...
         fd.setDirectory(System.getProperty("user.dir"));
@@ -914,7 +914,7 @@ public class BeanBox extends Panel implements Serializable, Runnable,
             // Beans that originate from a .ser file must be treated
             // effectively as having hidden-state. As such, they must always
             // be serialized. We need to propagate this information to
-            // a newly instantiated beans' wrapper, when we do an insert
+            // a newly instantiated imageFilters' wrapper, when we do an insert
             // into the beanbox, so that this information will be available
             // later at code generation time.
             boolean fromPrototypeInfo = BeanBoxFrame.getClipFromPrototypeInfo();
@@ -929,7 +929,7 @@ public class BeanBox extends Panel implements Serializable, Runnable,
     }
 
     /**
-     * Implementation method to make a connection between two beans. We draw a
+     * Implementation method to make a connection between two imageFilters. We draw a
      * rubber banded line from a source bean until the mouse is clicked on a
      * target bean.
      *

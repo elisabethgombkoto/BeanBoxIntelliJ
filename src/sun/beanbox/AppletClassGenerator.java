@@ -17,7 +17,7 @@ import java.lang.reflect.Method;
 public class AppletClassGenerator {
 
     /**
-     * Write Java statements to reinitialize a beans properties
+     * Write Java statements to reinitialize a imageFilters properties
      * to the indentedStream.
      */
     void generateBeanInitialization(Wrapper beanWrapper,
@@ -110,7 +110,7 @@ public class AppletClassGenerator {
         p.pp("import java.awt.Dimension;");
         p.pp("import java.applet.Applet;");
         p.pp("import java.lang.reflect.Method;");
-        p.pp("import java.beans.Beans;");
+        p.pp("import java.imageFilters.Beans;");
         p.pp("import sunw.beanbox.AppletSupport;");
         p.pp("import sunw.beanbox.PropertyHookup;");
 
@@ -184,7 +184,7 @@ public class AppletClassGenerator {
 
         // based on this BeanBox
         p.pp();
-        p.pp("// The fields used to hold the beans");
+        p.pp("// The fields used to hold the imageFilters");
         for (int i=0; i<beanCount; i++) {
             Wrapper w = (Wrapper) beanBox.getComponent(i);
             Object bean = w.getBean();
@@ -456,7 +456,7 @@ public class AppletClassGenerator {
         p.op("{");
         p.ip("Object args[] = new Object[1]; // arguments");
         p.pp("Class types[] = new Class[1]; // types");
-        p.pp("Class pClass = java.beans.PropertyChangeListener.class;");
+        p.pp("Class pClass = java.imageFilters.PropertyChangeListener.class;");
         p.pp();
         p.pp("PropertyHookup hook = (PropertyHookup) propInstances.get(source);");
         p.pp("if (hook == null) {");
@@ -511,7 +511,7 @@ public class AppletClassGenerator {
     }
 
     private void generateInitContentsFromStream(String appletName) {
-        p.pp("// Read hidden-state beans from stream");
+        p.pp("// Read hidden-state imageFilters from stream");
         p.pp("private void initContentsFromStream(java.io.ObjectInputStream ois)");
         p.ip("throws java.lang.ClassNotFoundException,");
         p.pp("java.io.IOException");
@@ -525,7 +525,7 @@ public class AppletClassGenerator {
 
         // generate based on this BeanBox...
         p.pp();
-        p.pp("// Get references to hidden-state beans");
+        p.pp("// Get references to hidden-state imageFilters");
         int serializedBeanIndex = 1; // index zero is reserved for applet name
         for (int i=0; i<beanCount; i++) {
             Wrapper w = (Wrapper) beanBox.getComponent(i);
@@ -535,14 +535,14 @@ public class AppletClassGenerator {
         }
         p.pp();
         p.pp("// Initialize the remainder of the applets contents");
-        p.pp("// including acquiring its nested beans and reconnecting hookups.");
+        p.pp("// including acquiring its nested imageFilters and reconnecting hookups.");
         p.pp("initContents();");
         p.op("}");
         p.pp();
     }
 
     private void generateInitCode(String appletName) {
-        p.pp("// Initialize nested beans");
+        p.pp("// Initialize nested imageFilters");
         p.pp("private void initContents()");
         p.i();
         p.ip("throws java.lang.ClassNotFoundException,");
@@ -557,11 +557,11 @@ public class AppletClassGenerator {
 
         // generate based on this BeanBox...
         p.pp();
-        p.pp("// Create nested beans");
+        p.pp("// Create nested imageFilters");
         for (int i=0; i<beanCount; i++) {
             Wrapper w = (Wrapper) beanBox.getComponent(i);
             Object bean = w.getBean();
-            // only instantiate non-hidden-state beans
+            // only instantiate non-hidden-state imageFilters
             if (this.beanHasHiddenState(bean) == false)
             {
                 p.pp(   uniqueName(bean)
@@ -576,7 +576,7 @@ public class AppletClassGenerator {
                 p.pp();
             }
         }
-        p.pp("// position all nested beans - we don't have it initially");
+        p.pp("// position all nested imageFilters - we don't have it initially");
         for (int i=0; i<beanCount; i++) {
             Wrapper w = (Wrapper) beanBox.getComponent(i);
             Object bean = w.getBean();
@@ -612,14 +612,14 @@ public class AppletClassGenerator {
 
         // generate based on this BeanBox...
         p.pp();
-        p.pp("// Get references to nested beans");
+        p.pp("// Get references to nested imageFilters");
         for (int i=0; i<beanCount; i++) {
             Wrapper w = (Wrapper) beanBox.getComponent(i);
             Object bean = w.getBean();
             readIntoField(bean, i+1);
         }
         p.pp("");
-        p.pp("// Don't position nested beans");
+        p.pp("// Don't position nested imageFilters");
         for (int i=0; i<beanCount; i++) {
             Wrapper w = (Wrapper) beanBox.getComponent(i);
             Object bean = w.getBean();
@@ -695,7 +695,7 @@ public class AppletClassGenerator {
     }
 
     /**
-     * Returns true if beans containing hidden-state are nested in
+     * Returns true if imageFilters containing hidden-state are nested in
      * this beanbox.
      */
     protected boolean shouldSerializeHiddenStateBeans()
@@ -705,7 +705,7 @@ public class AppletClassGenerator {
     }
 
     /**
-     * Initializes a private collection of beans that contain hidden-state,
+     * Initializes a private collection of imageFilters that contain hidden-state,
      * if any.
      */
     protected void findBeansWithHiddenState() {
@@ -740,12 +740,12 @@ public class AppletClassGenerator {
 
     // Private fields for Class generation
 
-    // Vector of beans with hidden state.
+    // Vector of imageFilters with hidden state.
     private Vector hiddenStateBeans;
     private static Hashtable names = new Hashtable(); // unique names
     private BeanBox beanBox;	// source for what we want to pack
     private int hookupCount = 0;	// how many hookups
-    private int beanCount = 0;	// how many beans
+    private int beanCount = 0;	// how many imageFilters
     private static File dir;	// where to generate before packing it up
     private PropertyEditor colorEditor;	// the PropertyEditor for color
     private PropertyEditor stringEditor;	// the PropertyEditor for string

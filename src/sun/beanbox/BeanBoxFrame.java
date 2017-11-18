@@ -374,7 +374,7 @@ public class BeanBoxFrame extends Frame implements LayoutManager, Runnable,
 
     // Added the following getter/setters.
     // We need to propogate the fromPrototype info across copies and pastes
-    // since beans originating from .ser files ("prototypes") must be
+    // since imageFilters originating from .ser files ("prototypes") must be
     // effectivley treated as having hidden-state at code generation time.
     // If we didn't propogate this info, we would have to generate
     // initialization statements for all properties, not just those modified

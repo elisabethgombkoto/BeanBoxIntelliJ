@@ -155,7 +155,7 @@ public class ExportDialog extends JDialog {
      */
     private JPanel getBeansPanel() {
         JPanel panel = new JPanel(new BorderLayout());
-        panel.add(new Label("The following beans will be generated. You can customize any node by selecting it:"), BorderLayout.PAGE_START);
+        panel.add(new Label("The following imageFilters will be generated. You can customize any node by selecting it:"), BorderLayout.PAGE_START);
 
         JScrollPane editorPanel = new JScrollPane(new JLabel("Select a node to edit it"));
 
@@ -191,7 +191,7 @@ public class ExportDialog extends JDialog {
      * Assembles the TreeView that contains all the Beans, Properties, Events and Methods.
      *
      * @param top         the root node of the tree.
-     * @param exportBeans a list of export beans that should be displayed.
+     * @param exportBeans a list of export imageFilters that should be displayed.
      */
     private void createNodes(DefaultMutableTreeNode top, List<ExportBean> exportBeans) {
         for (ExportBean exportBean : exportBeans) {

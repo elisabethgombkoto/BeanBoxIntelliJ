@@ -284,7 +284,7 @@ class IBSupportView extends Container {
         IBMemberList mList = new IBMemberList(model);
         c.add(mList, "East");
 
-        Label l = new Label("Change bus for selected beans to:");
+        Label l = new Label("Change bus for selected imageFilters to:");
         TextField t = new TextField("", 20);
         Panel p = new Panel();
         p.add(l);

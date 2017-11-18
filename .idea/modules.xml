@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BeanBoxExtension.iml" filepath="$PROJECT_DIR$/BeanBoxExtension.iml" />
-      <module fileurl="file://C:\Users\Elisabeth\IdeaProjects\BeanBoxIntelliJ\Test\Test.iml" filepath="C:\Users\Elisabeth\IdeaProjects\BeanBoxIntelliJ\Test\Test.iml" />
-      <module fileurl="file://C:\Users\Elisabeth\IdeaProjects\BeanBoxIntelliJ\TestBeans\TestBeans.iml" filepath="C:\Users\Elisabeth\IdeaProjects\BeanBoxIntelliJ\TestBeans\TestBeans.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Test/Test.iml" filepath="$PROJECT_DIR$/Test/Test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TestBeans/TestBeans.iml" filepath="$PROJECT_DIR$/TestBeans/TestBeans.iml" />
       <module fileurl="file://$PROJECT_DIR$/../exercise3/src/main/main.iml" filepath="$PROJECT_DIR$/../exercise3/src/main/main.iml" />
     </modules>
   </component>

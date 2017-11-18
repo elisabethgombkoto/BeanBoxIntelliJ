@@ -9,7 +9,7 @@ package sun.beanbox;
  * and test a new bean.
  *
  * The generated JAR contains a class that explicitly knows what are its
- * top level beans, which are stored in a single serialized stream
+ * top level imageFilters, which are stored in a single serialized stream
  * together with their hookups.
  * This makes it easy to access the classloader for itself,
  * makes it easy to customize by adding properties, methods, etc.
@@ -185,7 +185,7 @@ public class AppletGenerator {
         }
         int count = beanBox.getComponentCount();
 
-        // Count the number of beans with hidden-state that must be serialized.
+        // Count the number of imageFilters with hidden-state that must be serialized.
         int hiddenStateCount = 0;
         for (int i=0; i<count; i++) {
             Wrapper w = (Wrapper) beanBox.getComponent(i);
@@ -202,7 +202,7 @@ public class AppletGenerator {
         for (int i=0; i<count; i++) {
             Wrapper w = (Wrapper) beanBox.getComponent(i);
             Object bean = w.getBean();
-            // serialize out only beans with hidden state
+            // serialize out only imageFilters with hidden state
             if (appletClassGen.beanHasHiddenState(bean))
                 data[serializedBeanIndex++] = bean;
         }
@@ -342,8 +342,8 @@ public class AppletGenerator {
 
     private void writeMakefiles() {
         // A makefile may depend on serialized applet data if and only if the
-        // generated applet must serialize one or more of its nested beans.
-        // i.e. if some nested beans have hidden state.
+        // generated applet must serialize one or more of its nested imageFilters.
+        // i.e. if some nested imageFilters have hidden state.
 
         boolean usesSerializedAppletData
                 = appletClassGen.shouldSerializeHiddenStateBeans();
@@ -493,7 +493,7 @@ public class AppletGenerator {
             p.pp("if desired.");
             p.pp("");
             p.pp("At construction time, the generated Applet uses serialization data only if");
-            p.pp("it contains beans with hidden-state. Note, other builders may use different");
+            p.pp("it contains imageFilters with hidden-state. Note, other builders may use different");
             p.pp("techniques to reconstitute a compound bean.");
             p.pp("");
             p.pp("This directory contains the following files:");
@@ -543,7 +543,7 @@ public class AppletGenerator {
             p.pp("Class.getResource() call.  In particular, this means that the Juggler");
             p.pp("bean (in juggler.jar) will not be able to show its image.  IE4.0 does");
             p.pp("support getResourceAsStream() which is used by the generated Applet");
-            p.pp("to acquire serialized information on its beans.  Note that an Image");
+            p.pp("to acquire serialized information on its imageFilters.  Note that an Image");
             p.pp("can be created from an InputStream by first creating a byte array");
             p.pp("and then using Toolkit.createImage().");
 

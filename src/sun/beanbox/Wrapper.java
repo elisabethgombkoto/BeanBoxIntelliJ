@@ -730,7 +730,7 @@ public class Wrapper extends Panel implements Serializable, MouseListener,
     }
 
     /**
-     * show or hide all the "invisible beans".
+     * show or hide all the "invisible imageFilters".
      */
     static void showInvisibleBeans(boolean show) {
         for (int i = 0; i < invisibleWrappers.size(); i++) {
@@ -1011,7 +1011,7 @@ public class Wrapper extends Panel implements Serializable, MouseListener,
     transient private Vector propertyTargets;
 //	private Vector propertyTargets;   //hv2016
 
-    // hv2016: in case of direct event linking we need a list of listener beans
+    // hv2016: in case of direct event linking we need a list of listener imageFilters
     private Hashtable<String,Vector> listenerBeans;
 
     private static int hashBarWidth = 4;
@@ -1019,7 +1019,7 @@ public class Wrapper extends Panel implements Serializable, MouseListener,
     private static Image xHashBar;
     private static Image yHashBar;
 
-    // List of this wrappers' beans' changed properties
+    // List of this wrappers' imageFilters' changed properties
     private transient Vector changedProperties;
 //	private Vector changedProperties;  //hv2016
 

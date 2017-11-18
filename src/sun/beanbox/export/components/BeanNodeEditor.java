@@ -38,7 +38,7 @@ class BeanNodeEditor extends JPanel {
             }
         }
         JLabel name = new JLabel("Name: ");
-        name.setToolTipText("The name of the bean. It must be unique among all beans in this ExportBean and be a valid Java identifier.");
+        name.setToolTipText("The name of the bean. It must be unique among all imageFilters in this ExportBean and be a valid Java identifier.");
         TextField nameText = new TextField(beanNode.getName());
         java.util.List<ExportConstraintViolation> violationList = exporter.checkIfValidNodeName(exportBean, beanNode, nameText.getText());
         JLabel nameCheckLabel = new JLabel(violationList == null ? "Valid name" : "Invalid name");

@@ -212,13 +212,13 @@ public class JarLoader {
             return;
         }
         if (ji.getCount() == 0) {
-            System.err.println("Jar file "+jarFile+" didn't have any beans!");
+            System.err.println("Jar file "+jarFile+" didn't have any imageFilters!");
             if (!warnedAboutNoBeans) {
                 // We only print this explanatory message once.
                 warnedAboutNoBeans = true;
                 System.err.println("");
                 System.err.println("Each jar file needs to contain a manifest file describing which entries are");
-                System.err.println("beans.  You can should provide a suitable manifest when you create the jar.");
+                System.err.println("imageFilters.  You can should provide a suitable manifest when you create the jar.");
                 System.err.println("");
             }
         }
@@ -247,7 +247,7 @@ public class JarLoader {
         Hashtable headersTable = new Hashtable();
         if (mf == null) {
             // Beans are only identified through a manifest entry.
-            // If we don't have a manfiest, the beans hashtable
+            // If we don't have a manfiest, the imageFilters hashtable
             // should remain empty.
             beans = new Hashtable();
         } else {

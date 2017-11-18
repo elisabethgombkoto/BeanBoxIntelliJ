@@ -1,7 +1,7 @@
 package sun.beanbox;
 
 /**
- * An action to perform on created beans
+ * An action to perform on created imageFilters
  */
 
 import java.beans.*;

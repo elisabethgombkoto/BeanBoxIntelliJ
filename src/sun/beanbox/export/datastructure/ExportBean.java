@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Andreas Ertlschweiger on 26.05.2017.
  * <p>
- * This class describes a bean that is composed of one or more beans which are in relation to each other.
+ * This class describes a bean that is composed of one or more imageFilters which are in relation to each other.
  */
 public class ExportBean {
 

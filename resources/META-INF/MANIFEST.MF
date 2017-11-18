@@ -1,4 +1,9 @@
 Manifest-Version: 1.0
 
-Name: filters.Test
+Name: beans.Test
 Java-Bean: true
+
+Name: beans.RoiBean
+Java-Bean: true
+
+

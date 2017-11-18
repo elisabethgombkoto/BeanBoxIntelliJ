@@ -169,7 +169,7 @@ class ToolBoxPanel extends Panel implements Runnable, MouseListener {
     private Helper helper = new Helper();
 
     /**
-     * Add all the beans in a Jar file into the ToolBox
+     * Add all the imageFilters in a Jar file into the ToolBox
      */
     synchronized void addBeansInJar(String jarFile) throws IOException {
         JarLoader.loadJarDoOnBean(jarFile, helper);

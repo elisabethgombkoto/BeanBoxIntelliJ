@@ -68,7 +68,7 @@ public class AppletSupport {
 
 /**
  * Package private support class.  This provides a default AppletContext
- * for beans which are applets.
+ * for imageFilters which are applets.
  */
 
 class BeanBoxAppletContext implements AppletContext {
@@ -154,7 +154,7 @@ class BeanBoxAppletContext implements AppletContext {
 
 
 /**
- *  This provides an AppletStub for beans which are applets.
+ *  This provides an AppletStub for imageFilters which are applets.
  */
 class BeanBoxAppletStub implements AppletStub {
     transient boolean active;

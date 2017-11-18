@@ -51,9 +51,9 @@ public class Exporter {
     private boolean keepSources = false;
 
     private static final String MANIFEST_DIRECTORY_NAME = "META-INF";
-    private static final String BEAN_DIRECTORY_NAME = "beanBox/generated/beans";
-    private static final String SERIALIZED_PROPERTIES_DIRECTORY_NAME = "beanBox/generated/beans/properties";
-    private static final String ADAPTER_DIRECTORY_NAME = "beanBox/generated/beans/adapters";
+    private static final String BEAN_DIRECTORY_NAME = "beanBox/generated/imageFilters";
+    private static final String SERIALIZED_PROPERTIES_DIRECTORY_NAME = "beanBox/generated/imageFilters/properties";
+    private static final String ADAPTER_DIRECTORY_NAME = "beanBox/generated/imageFilters/adapters";
 
     private static final String DEFAULT_BEAN_NAME = "ExportBean";
 
@@ -72,7 +72,7 @@ public class Exporter {
      * Upon instantiation of the Exporter the selected Wrappers are grouped, processed and converted into a more suitable
      * data structure. Afterwards the resource dictionary is built by reading information about all required sources.
      *
-     * @param beans the beans that were selected for export
+     * @param beans the imageFilters that were selected for export
      * @throws IntrospectionException   if there is an error reading bean information
      * @throws IllegalArgumentException if there is an error accessing bean properties
      */
@@ -377,11 +377,11 @@ public class Exporter {
     }
 
     /**
-     * This method tries to infer the output interface of the ExportBean. It does so by checking which beans are only listeners
-     * and do not have any listeners. These beans are except for some special cases very likely to be the correct ones.
+     * This method tries to infer the output interface of the ExportBean. It does so by checking which imageFilters are only listeners
+     * and do not have any listeners. These imageFilters are except for some special cases very likely to be the correct ones.
      * If this fails a NodeSelector is shown to let the user specify the output interface.
      *
-     * @param createdNodes All available beans
+     * @param createdNodes All available imageFilters
      * @return returns a list of BeanNodes that compose the output interface
      * @throws IllegalArgumentException if no Beans are specified as the output interface we cannot continue
      */
@@ -400,11 +400,11 @@ public class Exporter {
     }
 
     /**
-     * This method tries to infer the input interface of the ExportBean. It does so by checking which beans only have listeners
-     * and do not listen to any bean. These beans are except for some special cases very likely to be the correct ones.
+     * This method tries to infer the input interface of the ExportBean. It does so by checking which imageFilters only have listeners
+     * and do not listen to any bean. These imageFilters are except for some special cases very likely to be the correct ones.
      * If this fails a NodeSelector is shown to let the user specify the input interface.
      *
-     * @param createdNodes All available beans
+     * @param createdNodes All available imageFilters
      * @return returns a list of BeanNodes that compose the input interface
      * @throws IllegalArgumentException if no Beans are specified as the input interface we cannot continue
      */
@@ -670,7 +670,7 @@ public class Exporter {
      * Possible bug: EventListener Interfaces that declare more than one method
      * Possible extension: Add PropertyVeto support
      *
-     * @param targetDirectory   the target directory for the beans
+     * @param targetDirectory   the target directory for the imageFilters
      * @param propertyDirectory the target directory for any serialized properties
      * @param exportBean        the bean to be generated
      * @throws IOException               if there is an error writing
@@ -711,14 +711,14 @@ public class Exporter {
                 .initializer("1L")
                 .build());
 
-        //add fields for all beans and add their instantiation to the constructor
+        //add fields for all imageFilters and add their instantiation to the constructor
         for (BeanNode node : beanNodes) {
             fields.add(FieldSpec.builder(node.getData().getClass(), StringUtil.lowercaseFirst(node.getName()))
                     .addModifiers(Modifier.PRIVATE)
                     .build());
             constructor.addCode("\t" + StringUtil.lowercaseFirst(node.getName()) + " = new " + node.getData().getClass().getCanonicalName() + "();\n");
         }
-        //hook the beans up with each other. We need to do this explicitly after instantiation of all beans hence the
+        //hook the imageFilters up with each other. We need to do this explicitly after instantiation of all imageFilters hence the
         //redundant loop
         for (BeanNode node : beanNodes) {
             for (AdapterCompositionEdge edge : node.getAdapterCompositionEdges()) {
@@ -807,7 +807,7 @@ public class Exporter {
             }
             /*
              * if you wanted to implement the "transparent property binding" that just calls two setters
-             * to change properties of different beans you would need to implement it here and think of a
+             * to change properties of different imageFilters you would need to implement it here and think of a
              * good way to display this on the UI
              */
             StringBuilder setterCall = new StringBuilder("").append(StringUtil.lowercaseFirst(property.getNode().getName())).append(".").append(setter.getName()).append("(");
@@ -954,7 +954,7 @@ public class Exporter {
             }
             propertyDescriptorArray.append("}");
             propertyDescriptor.addCode("\treturn new PropertyDescriptor[]" + propertyDescriptorArray + ";\n");
-            propertyDescriptor.addCode("} catch (java.beans.IntrospectionException e) {\n");
+            propertyDescriptor.addCode("} catch (java.imageFilters.IntrospectionException e) {\n");
             propertyDescriptor.addCode("\te.printStackTrace();\n");
             propertyDescriptor.addCode("}\n");
             propertyDescriptor.addCode("return null;\n");
@@ -970,7 +970,7 @@ public class Exporter {
             eventSetDescriptor.addCode("\tClass<?> cls = " + exportBean.getName() + ".class;\n");
             StringBuilder eventSetDescriptorArray = new StringBuilder("{");
             if (exportBean.isAddPropertyChangeSupport()) {
-                eventSetDescriptor.addCode("\tEventSetDescriptor esdPropertyChange = new EventSetDescriptor(cls, \"propertyChange\", java.beans.PropertyChangeListener.class, \"propertyChange\");\n");
+                eventSetDescriptor.addCode("\tEventSetDescriptor esdPropertyChange = new EventSetDescriptor(cls, \"propertyChange\", java.imageFilters.PropertyChangeListener.class, \"propertyChange\");\n");
                 eventSetDescriptorArray.append("esdPropertyChange");
             }
             for (ExportEvent exportEvent : exportEvents) {
@@ -995,7 +995,7 @@ public class Exporter {
             }
             eventSetDescriptorArray.append("}");
             eventSetDescriptor.addCode("\treturn new EventSetDescriptor[]" + eventSetDescriptorArray + ";\n");
-            eventSetDescriptor.addCode("} catch (java.beans.IntrospectionException e) {\n");
+            eventSetDescriptor.addCode("} catch (java.imageFilters.IntrospectionException e) {\n");
             eventSetDescriptor.addCode("\te.printStackTrace();\n");
             eventSetDescriptor.addCode("}\n");
             eventSetDescriptor.addCode("return null;\n");
@@ -1176,7 +1176,7 @@ public class Exporter {
     /**
      * Checks if a String is a valid name for a BeanNode. It may not be empty, must not exceed 64 characters, be a valid Java identifier,
      * must not be a Java keyword and it must be unique among all BeanNodes and its ExportBean in a single export. This String is only used
-     * internally and has no effect to the user. It is an optional configuration to help the user identify beans in the source code
+     * internally and has no effect to the user. It is an optional configuration to help the user identify imageFilters in the source code
      * after export.
      *
      * @param text the text to be checked

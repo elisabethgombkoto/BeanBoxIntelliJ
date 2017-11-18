@@ -27,7 +27,7 @@ public class JarInfo {
      * Create a JarInfo.
      * @param	jarName	The name of the file containing the Jar
      * @param	cl	The ClassLoader instance
-     * @param	beanName	The names for all the beans
+     * @param	beanName	The names for all the imageFilters
      * @param	fromPrototype	Whether this bean is from a serialized prototype
      */
     public JarInfo(String jarName,
@@ -94,7 +94,7 @@ public class JarInfo {
     }
 
     /**
-     * Get the number of beans in this Jar file
+     * Get the number of imageFilters in this Jar file
      */
     public int getCount() {
         return beanNames.length;
@@ -163,14 +163,14 @@ public class JarInfo {
     }
 
     /**
-     * In order to make life easier for beans developers we try to
+     * In order to make life easier for imageFilters developers we try to
      * provide detailed diagnostics on any failure in Beans.instantiate
      */
     void diagnoseInstantiationException(SimpleClassLoader cl, String beanName, Throwable realx) {
         System.err.print("\nWARNING: Could not instantiate bean \"" + beanName + "\"");
 
         if (cl == null) {
-            // This should never happen with user-defined beans.
+            // This should never happen with user-defined imageFilters.
             System.err.println(" from the system class-loader");
             return;
         }
@@ -283,18 +283,18 @@ public class JarInfo {
             java.lang.reflect.Constructor cons = cls.getConstructor(args);
             if (cons == null) {
                 System.err.println("    But the class did not have a zero-arg constructor.");
-                System.err.println("    All beans must provide public zero-arg constructors.");
+                System.err.println("    All imageFilters must provide public zero-arg constructors.");
                 return;
             }
             mods = cons.getModifiers();
             if (!java.lang.reflect.Modifier.isPublic(mods)) {
                 System.err.println("    But the class's zero-arg constructor was not declared public");
-                System.err.println("    All beans must provide public zero-arg constructors.");
+                System.err.println("    All imageFilters must provide public zero-arg constructors.");
                 return;
             }
         } catch (NoSuchMethodException ex) {
             System.err.println("    But the class did not have a zero-arg constructor.");
-            System.err.println("    All beans must provide public zero-arg constructors.");
+            System.err.println("    All imageFilters must provide public zero-arg constructors.");
             return;
         } catch (Throwable th) {
             System.err.println("    Unexpected exception in disgnoseInstantiationException");

@@ -1,7 +1,7 @@
 
 /**
- * This class manages events hookups between event source beans and
- * target methods on target beans.
+ * This class manages events hookups between event source imageFilters and
+ * target methods on target imageFilters.
  * It does this for each hookup by generating a .java file for an adaptor
  * class and then compiling and loading the adaptor.
  */

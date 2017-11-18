@@ -8,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
  * <p>
  * This class describes a property of a BeanNode that can be exported.
  * <p>
- * TODO if time: if we want to also use this as a tool to generate BeanInfo classes for existing beans this class could
+ * TODO if time: if we want to also use this as a tool to generate BeanInfo classes for existing imageFilters this class could
  * TODO if time: use properties like display name, short description etc to be set by the user to give full configurability
  */
 public class ExportProperty extends ExportFeature {
