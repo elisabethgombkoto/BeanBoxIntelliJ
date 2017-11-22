@@ -13,15 +13,19 @@ public class RoiBean implements Serializable, ImageProcessListener, Readable<Pla
 
     private int x;
     private int y;
+    private int width;
     private int height;
-    private Vector listeners;
-    private Rectangle rectangle;
-
     private RoiFilter roiFilter;
+    private PlanarImage image;
+    private Vector listeners;
 
     public RoiBean() {
+        x = 55;
+        y = 50;
+        width = 447;
+        height = 70;
         listeners = new Vector();
-        rectangle = new Rectangle();
+        roiFilter = new RoiFilter( (filters.pmp.interfaces.Readable<PlanarImage>) this, x, y, width, height);
     }
 
     public void addImageProcessListener(ImageProcessListener il) {
@@ -34,32 +38,43 @@ public class RoiBean implements Serializable, ImageProcessListener, Readable<Pla
 
     @Override
     public void imageValueChanged(ImageEvent ie) {
-        roiFilter = new RoiFilter( (Readable<PlanarImage>) ie.getSource(), rectangle);
-        PlanarImage roiImage = roiFilter.process(ie.getValue());
-        ImageEvent ie2 = new ImageEvent(this, roiImage);
-
-        // Listener benachrichtigen
-        Vector v;
-        synchronized(this) {
-            v = (Vector)listeners.clone();
-        }
-        for(int i = 0; i < v.size(); i++) {
-            ImageProcessListener wl = (ImageProcessListener)v.elementAt(i);
-            wl.imageValueChanged(ie2);
+        try {
+            image = ie.getValue();
+            processListeners();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    @Override
-    public PlanarImage read() throws StreamCorruptedException {
-        return null;
-    }
+    private void processListeners() throws Exception {
+        if (image != null) {
+            PlanarImage roiImage = roiFilter.process(image);
+            ImageEvent ie2 = new ImageEvent(this, roiImage);
 
+            // Listener benachrichtigen
+            Vector v;
+            synchronized(this) {
+                v = (Vector)listeners.clone();
+            }
+            for(int i = 0; i < v.size(); i++) {
+                ImageProcessListener wl = (ImageProcessListener)v.elementAt(i);
+                wl.imageValueChanged(ie2);
+            }
+        }else{
+            throw new Exception("image is null");
+        }
+    }
+/*
     public int getX() {
         return x;
     }
 
     public void setX(int x) {
         this.x = x;
+        roiFilter.setX(x);
+        if (image != null) {
+            processAndNotifyListeners();
+        }
     }
 
     public int getY() {
@@ -68,6 +83,10 @@ public class RoiBean implements Serializable, ImageProcessListener, Readable<Pla
 
     public void setY(int y) {
         this.y = y;
+        roiFilter.setY(y);
+        if (image != null) {
+            processAndNotifyListeners();
+        }
     }
 
     public int getHeight() {
@@ -76,5 +95,14 @@ public class RoiBean implements Serializable, ImageProcessListener, Readable<Pla
 
     public void setHeight(int height) {
         this.height = height;
+        roiFilter.setHeight(height);
+        if (image != null) {
+            processAndNotifyListeners();
+        }
+    }
+*/
+    @Override
+    public PlanarImage read() throws Exception {
+        throw new Exception("Method is not implemented");
     }
 }

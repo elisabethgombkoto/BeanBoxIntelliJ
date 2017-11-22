@@ -10,16 +10,16 @@ import filters.pmp.interfaces.Writeable;
 /**
  * Created by Elisabeth on 30.10.2017.
  */
-public class SourcePicture extends Source<PlanarImage> {
+public class ReadSourcePicture extends Source<PlanarImage> {
 
     private String _path;
 
-    public SourcePicture(String path, Writeable<PlanarImage> output) throws FileNotFoundException {
+    public ReadSourcePicture(String path, Writeable<PlanarImage> output) throws FileNotFoundException {
         super( output );
         _path = path;
     }
 
-    public SourcePicture(String path) {
+    public ReadSourcePicture(String path) {
         _path = path;
     }
 

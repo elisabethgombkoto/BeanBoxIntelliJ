@@ -6,4 +6,20 @@ Java-Bean: true
 Name: beans.RoiBean
 Java-Bean: true
 
+Name: beans.ReadSourcePictureBean
+Java-Bean: true
+
+Name: beans.ShowImageBean
+Java-Bean: true
+
+Name: beans.MedianBean
+Java-Bean: true
+
+Name: TresholdBean
+Java-Bean: true
+
+Name: OpeningBean
+Java-Bean: true
+
+
 

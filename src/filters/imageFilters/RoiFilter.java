@@ -15,21 +15,25 @@ public class RoiFilter extends DataTransformationFilter2<PlanarImage, PlanarImag
 
     private Rectangle _rectangle;
 
-    public RoiFilter(Readable<PlanarImage> input, Writeable<PlanarImage> output, Rectangle rectangle) throws InvalidParameterException {
+    public RoiFilter(Readable<PlanarImage> input, Writeable<PlanarImage> output, int x, int y,  int width, int height) throws InvalidParameterException {
         super( input, output );
-        _rectangle = rectangle;
+        _rectangle = createRectangle(x, y, width, height);
     }
 
-    public RoiFilter(Readable<PlanarImage> input, Rectangle rectangle) throws InvalidParameterException {
+
+
+    public RoiFilter(Readable<PlanarImage> input, int x, int y,  int width, int height) throws InvalidParameterException {
         super( input );
-        _rectangle = rectangle;
+        _rectangle = createRectangle(x, y, width, height);
     }
 
-    public RoiFilter(Writeable<PlanarImage> output, Rectangle rectangle) throws InvalidParameterException {
+    public RoiFilter(Writeable<PlanarImage> output,int x, int y,  int width, int height) throws InvalidParameterException {
         super( output );
-        _rectangle = rectangle;
+        _rectangle = createRectangle(x, y, width, height);
     }
-
+    private Rectangle createRectangle(int x, int y, int width, int height) {
+        return new Rectangle(x, y, width, height);
+    }
     @Override
     public PlanarImage process(PlanarImage entity) {
         PlanarImage image = entity;

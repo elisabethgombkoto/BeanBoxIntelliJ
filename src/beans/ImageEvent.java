@@ -1,10 +1,14 @@
 package beans;
 
 import javax.media.jai.PlanarImage;
+import java.util.EventObject;
 
-public class ImageEvent {
+public class ImageEvent extends EventObject {
     //Todo siehe Folien von Vollbrecht, classe anpassen so ist es kake aber compailert
-    public ImageEvent(RoiBean roiBean, PlanarImage roiImage) {
+    private PlanarImage value;
+    public ImageEvent(Object object, PlanarImage image) {
+        super(object);
+        this.value = image;
     }
 
     public Object getSource() {
@@ -12,6 +16,6 @@ public class ImageEvent {
     }
 
     public PlanarImage getValue() {
-        return null;
+        return value;
     }
 }
