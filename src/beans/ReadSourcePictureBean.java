@@ -22,22 +22,8 @@ public class ReadSourcePictureBean implements Serializable, Readable<PlanarImage
         listeners = new Vector();
         readSourcePicture = new ReadSourcePicture(imagePath);
     }
-/*
-    public String getImagePath() {
-        return imagePath;
-    }
 
-    public void setImagePath(String path) {
-        imagePath = path;
-        readSourcePicture.setImagePath(imagePath);
-        try {
-            value = read();
-        } catch (StreamCorruptedException e) {
-            e.printStackTrace();
-        }
-        fireImageEvent();
-    }
-*/
+
     public void addImageProcessListener(ImageProcessListener il) {
         listeners.addElement(il);
     }
@@ -71,4 +57,19 @@ public class ReadSourcePictureBean implements Serializable, Readable<PlanarImage
         return value;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String path) {
+        imagePath = path;
+        //TODO Katja fragen
+        // readSourcePicture.setImagePath(imagePath);
+        try {
+            value = read();
+        } catch (StreamCorruptedException e) {
+            e.printStackTrace();
+        }
+        fireImageEvent();
+    }
 }

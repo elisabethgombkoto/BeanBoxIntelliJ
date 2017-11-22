@@ -39,7 +39,7 @@ public abstract class DataCompositionFilter<in, out>  extends AbstractFilter<in,
     /**
      * read an entity from the filter. the filter will act like an passive-filter
      */
-    public out read() throws StreamCorruptedException {
+    public out read() throws Exception {
         // just read the next entity and return it 
     	out value;
     	
@@ -85,7 +85,7 @@ public abstract class DataCompositionFilter<in, out>  extends AbstractFilter<in,
      * @return the next entity
      * @throws StreamCorruptedException
      */
-    protected out getNextEntity() throws StreamCorruptedException {
+    protected out getNextEntity() throws Exception {
         if (!m_EndOfStream) {
             out entity = getNewEntityObject();
             boolean finished = false;

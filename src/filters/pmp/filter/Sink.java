@@ -69,6 +69,8 @@ public class Sink<T> implements Writeable<T>, Runnable{
         } catch (StreamCorruptedException e) {
             // TODO Automatisch erstellter Catch-Block
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 	

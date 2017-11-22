@@ -15,10 +15,19 @@ Java-Bean: true
 Name: beans.MedianBean
 Java-Bean: true
 
-Name: TresholdBean
+Name: beans.TresholdBean
 Java-Bean: true
 
-Name: OpeningBean
+Name: beans.OpeningBean
+Java-Bean: true
+
+Name: beans.ImageToFileBean
+Java-Bean: true;
+
+Name: beans.QualityDatasBean
+Java-Bean: true
+
+Name: beans.QualityResultSinkBean
 Java-Bean: true
 
 

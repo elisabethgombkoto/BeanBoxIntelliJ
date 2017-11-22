@@ -35,7 +35,7 @@ public abstract class DataTransformationFilter3<T,S> extends AbstractFilter<T,S>
 
     }
 
-    public S read() throws StreamCorruptedException {
+    public S read() throws Exception {
 		S result = null;
 
 		if (resultBuffer.size() == 0 )  {
@@ -104,11 +104,8 @@ public abstract class DataTransformationFilter3<T,S> extends AbstractFilter<T,S>
         } catch (StreamCorruptedException e) {
             // TODO Automatisch erstellter Catch-Block
             e.printStackTrace();
-        }
-    }
-    
-    
-
-	
-	
+        } catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

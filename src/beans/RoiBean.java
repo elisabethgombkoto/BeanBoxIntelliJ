@@ -64,16 +64,17 @@ public class RoiBean implements Serializable, ImageProcessListener, Readable<Pla
             throw new Exception("image is null");
         }
     }
-/*
+
     public int getX() {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(int x) throws Exception {
         this.x = x;
-        roiFilter.setX(x);
+        //TODO Katja fragen
+        //roiFilter.setX(x);
         if (image != null) {
-            processAndNotifyListeners();
+            processListeners();
         }
     }
 
@@ -81,11 +82,12 @@ public class RoiBean implements Serializable, ImageProcessListener, Readable<Pla
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(int y) throws Exception {
         this.y = y;
-        roiFilter.setY(y);
+        //TODO Katja fragen
+        //roiFilter.setY(y);
         if (image != null) {
-            processAndNotifyListeners();
+            processListeners();
         }
     }
 
@@ -93,14 +95,17 @@ public class RoiBean implements Serializable, ImageProcessListener, Readable<Pla
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(int height) throws Exception {
         this.height = height;
-        roiFilter.setHeight(height);
+        //TODO Katja fragen
+       // roiFilter.setHeight(height);
         if (image != null) {
-            processAndNotifyListeners();
+            processListeners();
         }
     }
-*/
+    //TODO Katja fragen brauch ich eine für width auch?
+
+
     @Override
     public PlanarImage read() throws Exception {
         throw new Exception("Method is not implemented");

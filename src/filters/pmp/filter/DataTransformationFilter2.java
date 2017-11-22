@@ -31,7 +31,7 @@ public abstract class DataTransformationFilter2<T,S> extends AbstractFilter<T,S>
 
     }
 
-    public S read() throws StreamCorruptedException {
+    public S read() throws Exception {
         T entity = readInput();
         S result = null;
         if (entity != null) 

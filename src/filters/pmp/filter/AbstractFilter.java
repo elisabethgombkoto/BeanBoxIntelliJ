@@ -54,7 +54,7 @@ public abstract class AbstractFilter<in, out> implements IOable<in, out>, Runnab
         }
     }
     
-    protected in readInput() throws StreamCorruptedException{
+    protected in readInput() throws Exception {
         if (m_Input != null){
             return m_Input.read();
         }else{
@@ -79,6 +79,8 @@ public abstract class AbstractFilter<in, out> implements IOable<in, out>, Runnab
         } catch (StreamCorruptedException e) {
             System.out.print("Thread reports error: ");
             System.out.println(Thread.currentThread().getId() + " (" + Thread.currentThread().getName() + ")");
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

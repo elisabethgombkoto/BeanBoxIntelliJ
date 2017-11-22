@@ -38,7 +38,7 @@ public class SimplePipe<T> implements IOable<T, T> {
         m_Input = input;
 	}
 
-	public T read() throws StreamCorruptedException {
+	public T read() throws Exception {
 		if ( m_Input == null )
             throw new InvalidParameterException("input filter can't be null!");
 		

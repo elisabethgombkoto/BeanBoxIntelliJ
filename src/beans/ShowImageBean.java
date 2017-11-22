@@ -33,11 +33,42 @@ public class ShowImageBean implements Serializable, ImageProcessListener, Readab
   }
   @Override
   public void imageValueChanged(ImageEvent imageEvent) {
+    //TODO Katja fragen
   }
   @Override
-  public PlanarImage read() throws StreamCorruptedException {
-    return null;
+  public PlanarImage read() throws Exception {
+    throw new Exception("not implemented");
   }
 
+  public PlanarImage getImage() {
+    return image;
+  }
 
+  public void setImage(PlanarImage image) {
+    this.image = image;
+  }
+
+  public Vector getListeners() {
+    return listeners;
+  }
+
+  public void setListeners(Vector listeners) {
+    this.listeners = listeners;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public ShowImageFilter getImageFilter() {
+    return imageFilter;
+  }
+
+  public void setImageFilter(ShowImageFilter imageFilter) {
+    this.imageFilter = imageFilter;
+  }
 }

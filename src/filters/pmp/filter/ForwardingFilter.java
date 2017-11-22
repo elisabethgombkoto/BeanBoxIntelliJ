@@ -29,7 +29,7 @@ public abstract class ForwardingFilter<T> extends AbstractFilter <T,T> {
         super(output);
     }
 
-    public T read() throws StreamCorruptedException {
+    public T read() throws Exception {
     	T input;
     	
         while (true) {

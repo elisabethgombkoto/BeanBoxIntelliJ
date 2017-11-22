@@ -50,7 +50,6 @@ public class TresholdBean implements Serializable, ImageProcessListener, Readabl
     if(image != null){
       PlanarImage tresholdImage = tresholdFilter.process(image);
       ImageEvent imageEvent = new ImageEvent(this, tresholdImage);
-
       Vector v;
       synchronized (this){
         v = (Vector)listeners.clone();
@@ -69,5 +68,51 @@ public class TresholdBean implements Serializable, ImageProcessListener, Readabl
     throw  new Exception("image is null");
   }
 
+  public PlanarImage getImage() {
+    return image;
+  }
 
+  public void setImage(PlanarImage image) {
+    this.image = image;
+  }
+
+  public Vector getListeners() {
+    return listeners;
+  }
+
+  public void setListeners(Vector listeners) {
+    this.listeners = listeners;
+  }
+
+  public TresholdFilter getTresholdFilter() {
+    return tresholdFilter;
+  }
+
+  public void setTresholdFilter(TresholdFilter tresholdFilter) {
+    this.tresholdFilter = tresholdFilter;
+  }
+
+  public double getLow() {
+    return low;
+  }
+
+  public void setLow(double low) {
+    this.low = low;
+  }
+
+  public double getHigh() {
+    return high;
+  }
+
+  public void setHigh(double high) {
+    this.high = high;
+  }
+
+  public double getMap() {
+    return map;
+  }
+
+  public void setMap(double map) {
+    this.map = map;
+  }
 }
