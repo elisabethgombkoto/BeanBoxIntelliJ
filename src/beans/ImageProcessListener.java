@@ -1,6 +1,7 @@
 package beans;
 
-public interface ImageProcessListener {
-    //Todo siehe Folien von Vollbrecht, interface anpassen so ist es kake aber compailert
-    void imageValueChanged(ImageEvent ie2);
+import java.util.EventListener;
+
+public interface ImageProcessListener extends EventListener {
+    public abstract void imageValueChanged(ImageEvent ie);
 }

@@ -11,8 +11,8 @@ public class ImageEvent extends EventObject {
         this.value = image;
     }
 
-    public Object getSource() {
-        return null;
+    public void setValue(PlanarImage value ){
+        this.value = value;
     }
 
     public PlanarImage getValue() {

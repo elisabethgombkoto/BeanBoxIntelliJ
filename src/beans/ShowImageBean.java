@@ -34,6 +34,31 @@ public class ShowImageBean implements Serializable, ImageProcessListener, Readab
   @Override
   public void imageValueChanged(ImageEvent imageEvent) {
     //TODO Katja fragen
+    try {
+      image = imageEvent.getValue();
+      processListeners();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  private void processListeners() throws Exception {
+    if (image != null) {
+      PlanarImage imageToShow = imageFilter.process(image);
+      ImageEvent ie2 = new ImageEvent(this, imageToShow);
+
+      // Listener benachrichtigen
+      Vector v;
+      synchronized(this) {
+        v = (Vector)listeners.clone();
+      }
+      for(int i = 0; i < v.size(); i++) {
+        ImageProcessListener wl = (ImageProcessListener)v.elementAt(i);
+        wl.imageValueChanged(ie2);
+      }
+    }else{
+      throw new Exception("image is null");
+    }
   }
   @Override
   public PlanarImage read() throws Exception {
