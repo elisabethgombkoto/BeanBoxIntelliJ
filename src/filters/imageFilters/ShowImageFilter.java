@@ -32,7 +32,7 @@ public class ShowImageFilter extends DataTransformationFilter2<PlanarImage, Plan
         _title = title;
     }
 
-    protected PlanarImage process(PlanarImage image) {
+    public PlanarImage process(PlanarImage image) {
         // Create a frame for display.
         JFrame frame = new JFrame();
         frame.setTitle( "DisplayJAI: " + _title );

@@ -38,7 +38,7 @@ public class MedianFilter extends DataTransformationFilter2<PlanarImage, PlanarI
 
     }
 
-    protected PlanarImage process(PlanarImage entity) {
+    public PlanarImage process(PlanarImage entity) {
         final ParameterBlock pb = new ParameterBlock();
         pb.addSource( entity );
         pb.add( _medianFilterShape );

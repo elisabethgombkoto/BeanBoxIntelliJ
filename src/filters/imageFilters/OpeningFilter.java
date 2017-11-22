@@ -40,7 +40,7 @@ public class OpeningFilter extends DataTransformationFilter2<PlanarImage, Planar
 
     KernelJAI kernel = new KernelJAI( 9, 9, kernelData );
 
-    protected PlanarImage process(PlanarImage entity) {
+    public PlanarImage process(PlanarImage entity) {
         PlanarImage image = erodeProcess( entity );
         return dilateProcess( image );
     }

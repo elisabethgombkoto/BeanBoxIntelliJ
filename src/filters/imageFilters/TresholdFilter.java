@@ -39,7 +39,7 @@ public class TresholdFilter extends DataTransformationFilter2<PlanarImage, Plana
         _map = map;
     }
 
-    protected PlanarImage process(PlanarImage entity) {
+    public PlanarImage process(PlanarImage entity) {
         double[] lowArray = {_low};
         double[] highArray = {_high};
         double[] mapArray = {_map};
