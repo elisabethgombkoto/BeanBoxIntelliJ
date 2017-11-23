@@ -20,10 +20,9 @@ public class QualityResultSinkBean implements Serializable, IDataQualityDatasCha
   private ArrayList<QualityData> qualityDataArrayList;
 
   public QualityResultSinkBean() throws IOException {
-    exceptedMiddelCoordinatePath = System.getProperty("user.dir") +"\\expectedCentroids.txt";
-      destinationPath = System.getProperty("user.dir") +"\\result.txt";
+    exceptedMiddelCoordinatePath = System.getProperty("user.dir") + "\\expectedCentroids.txt";
+    destinationPath = System.getProperty("user.dir") + "\\result.txt";
     qualityResultSink = new QualityResultSink((filters.pmp.interfaces.Readable<ArrayList<QualityData>>) this, exceptedMiddelCoordinatePath, destinationPath);
-
   }
 
   @Override
@@ -71,6 +70,5 @@ public class QualityResultSinkBean implements Serializable, IDataQualityDatasCha
     } catch (IOException e) {
       e.printStackTrace();
     }
-
   }
 }
