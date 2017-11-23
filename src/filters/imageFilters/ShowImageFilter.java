@@ -54,4 +54,8 @@ public class ShowImageFilter extends DataTransformationFilter2<PlanarImage, Plan
         frame.setVisible( true ); // show the frame.
         return image;
     }
+
+  public void setTitle(String title) {
+    _title = title;
+  }
 }

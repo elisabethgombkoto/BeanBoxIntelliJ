@@ -11,7 +11,7 @@ import java.util.Vector;
 /**
  * Created by Elisabeth on 22.11.2017.
  */
-public class TresholdBean implements Serializable, ImageProcessListener, Readable<PlanarImage> {
+public class TresholdBean implements Serializable, IImageProcessListener, Readable<PlanarImage> {
 
   private PlanarImage image;
   private Vector listeners;
@@ -28,11 +28,11 @@ public class TresholdBean implements Serializable, ImageProcessListener, Readabl
     tresholdFilter = new TresholdFilter((filters.pmp.interfaces.Readable<PlanarImage>) this, low, high, map);
   }
 
-  public void addImageProcessListener(ImageProcessListener il) {
+  public void addIImageProcessListener(IImageProcessListener il) {
     listeners.addElement(il);
   }
 
-  public void removeImageProcessListener(ImageProcessListener il) {
+  public void removeIImageProcessListener(IImageProcessListener il) {
     listeners.removeElement(il);
   }
 
@@ -55,7 +55,7 @@ public class TresholdBean implements Serializable, ImageProcessListener, Readabl
         v = (Vector)listeners.clone();
       }
       for(int i = 0; i<v.size(); i++){
-        ImageProcessListener w1 = (ImageProcessListener)v.elementAt(i);
+        IImageProcessListener w1 = (IImageProcessListener)v.elementAt(i);
         w1.imageValueChanged(imageEvent);
       }
     }else {
@@ -67,52 +67,40 @@ public class TresholdBean implements Serializable, ImageProcessListener, Readabl
   public PlanarImage read() throws StreamCorruptedException, Exception {
     throw  new Exception("image is null");
   }
-
-  public PlanarImage getImage() {
-    return image;
-  }
-
-  public void setImage(PlanarImage image) {
-    this.image = image;
-  }
-
-  public Vector getListeners() {
-    return listeners;
-  }
-
-  public void setListeners(Vector listeners) {
-    this.listeners = listeners;
-  }
-
-  public TresholdFilter getTresholdFilter() {
-    return tresholdFilter;
-  }
-
-  public void setTresholdFilter(TresholdFilter tresholdFilter) {
-    this.tresholdFilter = tresholdFilter;
-  }
-
   public double getLow() {
     return low;
   }
 
-  public void setLow(double low) {
+  public void setLow(double low) throws Exception {
     this.low = low;
+    tresholdFilter.setLow(low);
+    if (image != null) {
+      processListener();
+    }
   }
 
   public double getHigh() {
     return high;
   }
 
-  public void setHigh(double high) {
+  public void setHigh(double high) throws Exception {
     this.high = high;
+    tresholdFilter.setHigh(high);
+    if (image != null) {
+      processListener();
+    }
   }
 
   public double getMap() {
     return map;
   }
 
-  public void setMap(double map) {
+  public void setMap(double map) throws Exception {
     this.map = map;
+    this.high = high;
+    tresholdFilter.setMap(map);
+    if (image != null) {
+      processListener();
+    }
   }
 }

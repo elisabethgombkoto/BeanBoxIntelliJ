@@ -46,4 +46,11 @@ public class MedianFilter extends DataTransformationFilter2<PlanarImage, PlanarI
         return JAI.create( "medianfilter", pb );
     }
 
+  public void setSize(int size) {
+    _size = size;
+  }
+
+    public void setMedianFilterShape(MedianFilterShape medianFilterShape) {
+        _medianFilterShape = medianFilterShape;
+    }
 }

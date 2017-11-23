@@ -12,23 +12,21 @@ public class ReadSourcePictureBean implements Serializable, Readable<PlanarImage
 
     private String imagePath;
     private PlanarImage value;
-
     private Vector listeners;
-
     private ReadSourcePicture readSourcePicture;
 
     public ReadSourcePictureBean() {
-        imagePath = "../../resources/loetstellen.jpg";
+        imagePath = "C:\\Users\\Elisabeth\\IdeaProjects\\BeanBoxIntelliJ\\resources\\loetstellen.jpg";
         listeners = new Vector();
         readSourcePicture = new ReadSourcePicture(imagePath);
     }
 
 
-    public void addImageProcessListener(ImageProcessListener il) {
+    public void addIImageProcessListener(IImageProcessListener il) {
         listeners.addElement(il);
     }
 
-    public void removeImageProcessListener(ImageProcessListener il) {
+    public void removeIImageProcessListener(IImageProcessListener il) {
         listeners.removeElement(il);
     }
 
@@ -39,8 +37,8 @@ public class ReadSourcePictureBean implements Serializable, Readable<PlanarImage
         }
         ImageEvent ie = new ImageEvent(this, value);
         for (int i = 0; i < vectorListeners.size(); i++) {
-            ImageProcessListener imageProcessListener = (ImageProcessListener) vectorListeners.elementAt(i);
-            imageProcessListener.imageValueChanged(ie);
+            IImageProcessListener IImageProcessListener = (IImageProcessListener) vectorListeners.elementAt(i);
+            IImageProcessListener.imageValueChanged(ie);
         }
     }
 
@@ -63,8 +61,7 @@ public class ReadSourcePictureBean implements Serializable, Readable<PlanarImage
 
     public void setImagePath(String path) {
         imagePath = path;
-        //TODO Katja fragen
-        // readSourcePicture.setImagePath(imagePath);
+        readSourcePicture.setImagePath(imagePath);
         try {
             value = read();
         } catch (StreamCorruptedException e) {

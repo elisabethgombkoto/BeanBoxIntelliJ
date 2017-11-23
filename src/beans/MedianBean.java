@@ -2,17 +2,27 @@ package beans;
 
 import filters.imageFilters.MedianFilter;
 import filters.pmp.interfaces.Readable;
+
 import javax.media.jai.PlanarImage;
 import javax.media.jai.operator.MedianFilterDescriptor;
 import javax.media.jai.operator.MedianFilterShape;
 import java.io.Serializable;
-import java.io.StreamCorruptedException;
 import java.util.Vector;
 
 /**
  * Created by Elisabeth on 22.11.2017.
+ * <p>
+ * Todo beanInfo siehe osborn flavor
+ * p1 filterschape
+ * p2 size
+ * Todo property descriptor p1 und p2 hinfügen
+ * Todo editor class getTags()--> wie soll in drop down angezeigt werden
+ * setAsText() --> immmer erst setValue() aufrufen wenn plus ausgewählt dann soll richtige enum
+ * <p>
+ * <p>
+ * Todo alle anderen classe  ee clampBeanInfo getmethodDescriptor()
  */
-public class MedianBean implements Serializable, ImageProcessListener, Readable<PlanarImage> {
+public class MedianBean implements Serializable, IImageProcessListener, Readable<PlanarImage> {
 
   private MedianFilterShape medianFilterShape;
   private int size;
@@ -20,18 +30,18 @@ public class MedianBean implements Serializable, ImageProcessListener, Readable<
   private PlanarImage image;
   private Vector listeners;
 
-  public MedianBean(){
+  public MedianBean() {
     medianFilterShape = MedianFilterDescriptor.MEDIAN_MASK_SQUARE;
     size = 5;
     medianFilter = new MedianFilter((filters.pmp.interfaces.Readable<PlanarImage>) this, medianFilterShape, size);
     listeners = new Vector();
   }
 
-  public void addImageProcessListener(ImageProcessListener il) {
+  public void addIImageProcessListener(IImageProcessListener il) {
     listeners.addElement(il);
   }
 
-  public void removeImageProcessListener(ImageProcessListener il) {
+  public void removeIImageProcessListener(IImageProcessListener il) {
     listeners.removeElement(il);
   }
 
@@ -52,14 +62,14 @@ public class MedianBean implements Serializable, ImageProcessListener, Readable<
 
       // Listener benachrichtigen
       Vector v;
-      synchronized(this) {
-        v = (Vector)listeners.clone();
+      synchronized (this) {
+        v = (Vector) listeners.clone();
       }
-      for(int i = 0; i < v.size(); i++) {
-        ImageProcessListener wl = (ImageProcessListener)v.elementAt(i);
+      for (int i = 0; i < v.size(); i++) {
+        IImageProcessListener wl = (IImageProcessListener) v.elementAt(i);
         wl.imageValueChanged(ie2);
       }
-    }else{
+    } else {
       throw new Exception("image is null");
     }
   }
@@ -75,37 +85,21 @@ public class MedianBean implements Serializable, ImageProcessListener, Readable<
 
   public void setMedianFilterShape(MedianFilterShape medianFilterShape) {
     this.medianFilterShape = medianFilterShape;
+    medianFilter.setMedianFilterShape(medianFilterShape);
+    if(image!=null){
+      medianFilter.process(image);
+    }
   }
 
   public int getSize() {
     return size;
   }
 
-  public void setSize(int size) {
+  public void setSize(int size) throws Exception {
     this.size = size;
-  }
-
-  public MedianFilter getMedianFilter() {
-    return medianFilter;
-  }
-
-  public void setMedianFilter(MedianFilter medianFilter) {
-    this.medianFilter = medianFilter;
-  }
-
-  public PlanarImage getImage() {
-    return image;
-  }
-
-  public void setImage(PlanarImage image) {
-    this.image = image;
-  }
-
-  public Vector getListeners() {
-    return listeners;
-  }
-
-  public void setListeners(Vector listeners) {
-    this.listeners = listeners;
+    medianFilter.setSize(size);
+    if (image != null) {
+      processListeners();
+    }
   }
 }

@@ -22,7 +22,7 @@ Name: beans.OpeningBean
 Java-Bean: true
 
 Name: beans.ImageToFileBean
-Java-Bean: true;
+Java-Bean: true
 
 Name: beans.QualityDatasBean
 Java-Bean: true

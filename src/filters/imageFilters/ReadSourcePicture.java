@@ -39,4 +39,8 @@ public class ReadSourcePicture extends Source<PlanarImage> {
             e.printStackTrace();
         }
     }
+
+  public void setImagePath(String imagePath) {
+    _path = imagePath;
+  }
 }

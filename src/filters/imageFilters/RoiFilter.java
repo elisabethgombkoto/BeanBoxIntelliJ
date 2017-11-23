@@ -10,36 +10,68 @@ import java.security.InvalidParameterException;
 
 /**
  * Created by Bernd on 06.11.2017.
+ *
+ * Todo drop down für ein form unddie grösse erst nacher bestimmen
  */
 public class RoiFilter extends DataTransformationFilter2<PlanarImage, PlanarImage> {
 
-    private Rectangle _rectangle;
+  private Rectangle rectangle;
+  private int x;
+  private int y;
+  private int width;
+  private int height;
 
-    public RoiFilter(Readable<PlanarImage> input, Writeable<PlanarImage> output, int x, int y,  int width, int height) throws InvalidParameterException {
-        super( input, output );
-        _rectangle = createRectangle(x, y, width, height);
-    }
+  public RoiFilter(Readable<PlanarImage> input, Writeable<PlanarImage> output, int x, int y, int width, int height) throws InvalidParameterException {
+    super(input, output);
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+  }
 
+  public RoiFilter(Readable<PlanarImage> input, int x, int y, int width, int height) throws InvalidParameterException {
+    super(input);
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+  }
 
+  public RoiFilter(Writeable<PlanarImage> output, int x, int y, int width, int height) throws InvalidParameterException {
+    super(output);
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+  }
 
-    public RoiFilter(Readable<PlanarImage> input, int x, int y,  int width, int height) throws InvalidParameterException {
-        super( input );
-        _rectangle = createRectangle(x, y, width, height);
-    }
+  private Rectangle createRectangle(int x, int y, int width, int height) {
+    return new Rectangle(x, y, width, height);
+  }
 
-    public RoiFilter(Writeable<PlanarImage> output,int x, int y,  int width, int height) throws InvalidParameterException {
-        super( output );
-        _rectangle = createRectangle(x, y, width, height);
-    }
-    private Rectangle createRectangle(int x, int y, int width, int height) {
-        return new Rectangle(x, y, width, height);
-    }
-    @Override
-    public PlanarImage process(PlanarImage entity) {
-        PlanarImage image = entity;
-        image = PlanarImage.wrapRenderedImage( image.getAsBufferedImage( _rectangle, image.getColorModel() ) );
-        image.setProperty( "offsetX", (int) _rectangle.getX() );
-        image.setProperty( "offsetY", (int) _rectangle.getY() );
-        return image;
-    }
+  @Override
+  public PlanarImage process(PlanarImage entity) {
+    rectangle = new Rectangle(x, y, width, height);
+    PlanarImage image = entity;
+    image = PlanarImage.wrapRenderedImage(image.getAsBufferedImage(rectangle, image.getColorModel()));
+    image.setProperty("offsetX", (int) rectangle.getX());
+    image.setProperty("offsetY", (int) rectangle.getY());
+    return image;
+  }
+
+  public void setX(int x) {
+    this.x = x;
+  }
+
+  public void setY(int y) {
+    this.y = y;
+  }
+
+  public void setHeight(int height) {
+    this.height = height;
+  }
+
+  public void setWidth(int width) {
+    this.width = width;
+  }
 }

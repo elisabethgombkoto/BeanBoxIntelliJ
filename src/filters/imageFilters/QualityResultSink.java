@@ -128,4 +128,9 @@ public class QualityResultSink extends Sink<ArrayList<QualityData>> {
       e.printStackTrace();
     }
   }
+
+  public void setPath(String path) throws IOException {
+    _exceptedMiddelCoordinatePath = path;
+    _fileWriter = new FileWriter(path);
+  }
 }

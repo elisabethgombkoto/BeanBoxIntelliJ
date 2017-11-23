@@ -5,35 +5,34 @@ import filters.pmp.interfaces.Readable;
 
 import javax.media.jai.PlanarImage;
 import java.io.Serializable;
-import java.io.StreamCorruptedException;
 import java.util.Vector;
 
 /**
  * Created by Elisabeth on 22.11.2017.
  */
-public class ShowImageBean implements Serializable, ImageProcessListener, Readable<PlanarImage> {
+public class ShowImageBean implements Serializable, IImageProcessListener, Readable<PlanarImage> {
 
   private PlanarImage image;
   private Vector listeners;
   private String title;
   private ShowImageFilter imageFilter;
 
-  public ShowImageBean(){
+  public ShowImageBean() {
     listeners = new Vector();
     title = "image";
     imageFilter = new ShowImageFilter((filters.pmp.interfaces.Readable<PlanarImage>) this, title);
   }
 
-  public void addImageProcessListener(ImageProcessListener il) {
+  public void addIImageProcessListener(IImageProcessListener il) {
     listeners.addElement(il);
   }
 
-  public void removeImageProcessListener(ImageProcessListener il) {
+  public void removeIImageProcessListener(IImageProcessListener il) {
     listeners.removeElement(il);
   }
+
   @Override
   public void imageValueChanged(ImageEvent imageEvent) {
-    //TODO Katja fragen
     try {
       image = imageEvent.getValue();
       processListeners();
@@ -49,51 +48,32 @@ public class ShowImageBean implements Serializable, ImageProcessListener, Readab
 
       // Listener benachrichtigen
       Vector v;
-      synchronized(this) {
-        v = (Vector)listeners.clone();
+      synchronized (this) {
+        v = (Vector) listeners.clone();
       }
-      for(int i = 0; i < v.size(); i++) {
-        ImageProcessListener wl = (ImageProcessListener)v.elementAt(i);
+      for (int i = 0; i < v.size(); i++) {
+        IImageProcessListener wl = (IImageProcessListener) v.elementAt(i);
         wl.imageValueChanged(ie2);
       }
-    }else{
+    } else {
       throw new Exception("image is null");
     }
   }
+
   @Override
   public PlanarImage read() throws Exception {
     throw new Exception("not implemented");
-  }
-
-  public PlanarImage getImage() {
-    return image;
-  }
-
-  public void setImage(PlanarImage image) {
-    this.image = image;
-  }
-
-  public Vector getListeners() {
-    return listeners;
-  }
-
-  public void setListeners(Vector listeners) {
-    this.listeners = listeners;
   }
 
   public String getTitle() {
     return title;
   }
 
-  public void setTitle(String title) {
+  public void setTitle(String title) throws Exception {
     this.title = title;
-  }
-
-  public ShowImageFilter getImageFilter() {
-    return imageFilter;
-  }
-
-  public void setImageFilter(ShowImageFilter imageFilter) {
-    this.imageFilter = imageFilter;
+    imageFilter.setTitle(title);
+    if (image != null) {
+      processListeners();
+    }
   }
 }

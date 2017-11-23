@@ -1,10 +1,8 @@
 package beans;
 
 import javax.media.jai.PlanarImage;
-import java.io.IOException;
 import java.io.Serializable;
 import java.io.StreamCorruptedException;
-import java.nio.CharBuffer;
 import java.util.Vector;
 
 import filters.imageFilters.OpeningFilter;
@@ -13,7 +11,7 @@ import filters.pmp.interfaces.Readable;
 /**
  * Created by Elisabeth on 22.11.2017.
  */
-public class OpeningBean implements Serializable, ImageProcessListener, Readable<PlanarImage>  {
+public class OpeningBean implements Serializable, IImageProcessListener, Readable<PlanarImage>  {
 
   private OpeningFilter openingFilter;
   private PlanarImage image;
@@ -23,6 +21,15 @@ public class OpeningBean implements Serializable, ImageProcessListener, Readable
     listeners = new Vector();
     openingFilter = new OpeningFilter((filters.pmp.interfaces.Readable<PlanarImage>) this);
   }
+
+  public void addIImageProcessListener(IImageProcessListener il) {
+    listeners.addElement(il);
+  }
+
+  public void removeIImageProcessListener(IImageProcessListener il) {
+    listeners.removeElement(il);
+  }
+
   @Override
   public void imageValueChanged(ImageEvent ie) {
 
@@ -45,7 +52,7 @@ public class OpeningBean implements Serializable, ImageProcessListener, Readable
         v = (Vector)listeners.clone();
       }
       for(int i = 0; i < v.size(); i++) {
-        ImageProcessListener wl = (ImageProcessListener)v.elementAt(i);
+        IImageProcessListener wl = (IImageProcessListener)v.elementAt(i);
         wl.imageValueChanged(ie2);
       }
     }else{
@@ -56,29 +63,5 @@ public class OpeningBean implements Serializable, ImageProcessListener, Readable
   @Override
   public PlanarImage read() throws StreamCorruptedException, Exception {
     throw new Exception("not implemented");
-  }
-
-  public OpeningFilter getOpeningFilter() {
-    return openingFilter;
-  }
-
-  public void setOpeningFilter(OpeningFilter openingFilter) {
-    this.openingFilter = openingFilter;
-  }
-
-  public PlanarImage getImage() {
-    return image;
-  }
-
-  public void setImage(PlanarImage image) {
-    this.image = image;
-  }
-
-  public Vector getListeners() {
-    return listeners;
-  }
-
-  public void setListeners(Vector listeners) {
-    this.listeners = listeners;
   }
 }

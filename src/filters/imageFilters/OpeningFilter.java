@@ -15,6 +15,7 @@ import java.security.InvalidParameterException;
  * https://findusages.com/search/javax.media.jai.KernelJAI/KernelJAI$3?offset=0
  */
 public class OpeningFilter extends DataTransformationFilter2<PlanarImage, PlanarImage> {
+
     public OpeningFilter(Readable<PlanarImage> input, Writeable<PlanarImage> output) throws InvalidParameterException {
         super( input, output );
     }

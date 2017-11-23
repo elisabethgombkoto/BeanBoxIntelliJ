@@ -32,9 +32,11 @@ public class QualityDatasFilter extends DataTransformationFilter2<PlanarImage, A
         super( output );
     }
 
-
-    protected ArrayList<QualityData> process(PlanarImage entity) {
+    @Override
+    public ArrayList<QualityData> process(PlanarImage entity) {
         _image = entity;
+        _general = new HashMap<Coordinate, Boolean>();
+        _figures = new LinkedList<ArrayList<Coordinate>>();
         BufferedImage bi = entity.getAsBufferedImage();
 
         for (int x = 0; x < bi.getWidth(); x++) {

@@ -36,7 +36,11 @@ public class ImageToFileFilter extends DataTransformationFilter1<PlanarImage> {
     }
 
     @Override
-    protected void process(PlanarImage image) {
+    public void process(PlanarImage image) {
         RenderedOp op = JAI.create( "filestore", image, _destinationPath, "png" );
     }
+
+  public void setDestinationPath(String destinationPath) {
+    _destinationPath = destinationPath;
+  }
 }
