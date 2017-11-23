@@ -21,8 +21,8 @@ public class QualityResultSinkBean implements Serializable, IDataQualityDatasCha
 
   public QualityResultSinkBean() throws IOException {
     exceptedMiddelCoordinatePath = "C:\\Users\\Elisabeth\\IdeaProjects\\BeanBoxIntelliJ\\resources\\expectedCentroids.txt";
-    qualityResultSink = new QualityResultSink((filters.pmp.interfaces.Readable<ArrayList<QualityData>>) this, exceptedMiddelCoordinatePath, destinationPath);
     destinationPath = "C:\\Users\\Elisabeth\\IdeaProjects\\BeanBoxIntelliJ\\resources\\expectedPiscture.png";
+    qualityResultSink = new QualityResultSink((filters.pmp.interfaces.Readable<ArrayList<QualityData>>) this, exceptedMiddelCoordinatePath, destinationPath);
   }
 
   @Override

@@ -36,7 +36,10 @@ public class QualityResultSink extends Sink<ArrayList<QualityData>> {
   @Override
   public void write(ArrayList<QualityData> actualValues) throws StreamCorruptedException {
     try {
-      _fileWriter = new FileWriter(_destinationPath);
+      if(_fileWriter == null){
+        _fileWriter = new FileWriter(new File(_destinationPath));
+      }
+
 
     ArrayList<Coordinate> expectedValues = createExpectedCordinateList();
     StringBuilder stringBuilder = new StringBuilder();

@@ -5,6 +5,7 @@ import sun.beanbox.BeanBoxFrame;
  */
 public class Run {
   public static void main(String[] args) {
+    System.setProperty( "com.sun.media.jai.disableMediaLib", "true" );
     BeanBoxFrame.main(new String[]{});
   }
 }
