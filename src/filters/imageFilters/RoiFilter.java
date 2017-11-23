@@ -45,11 +45,7 @@ public class RoiFilter extends DataTransformationFilter2<PlanarImage, PlanarImag
     this.height = height;
   }
 
-  private Rectangle createRectangle(int x, int y, int width, int height) {
-    return new Rectangle(x, y, width, height);
-  }
-
-  @Override
+   @Override
   public PlanarImage process(PlanarImage entity) {
     rectangle = new Rectangle(x, y, width, height);
     PlanarImage image = entity;

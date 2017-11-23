@@ -18,20 +18,26 @@ public class QualityResultSink extends Sink<ArrayList<QualityData>> {
   private FileWriter _fileWriter;
   private String _exceptedMiddelCoordinatePath;
   private  int _tolerance = 5;
+  private String _destinationPath;
 
-  public QualityResultSink(Readable<ArrayList<QualityData>> input, String path, FileWriter fileWriter) throws InvalidParameterException {
+  public QualityResultSink(Readable<ArrayList<QualityData>> input, String path, String destinationPath) throws InvalidParameterException, IOException {
     super(input);
     _exceptedMiddelCoordinatePath = path;
-    _fileWriter = fileWriter;
+    _destinationPath = destinationPath;
+
   }
 
-  public QualityResultSink(String path, FileWriter fileWriter)  {
+  public QualityResultSink( FileWriter fileWriter, String path, String destinationPath)  {
     _exceptedMiddelCoordinatePath = path;
-    _fileWriter = fileWriter;
+    _destinationPath = destinationPath;
+
   }
 
   @Override
   public void write(ArrayList<QualityData> actualValues) throws StreamCorruptedException {
+    try {
+      _fileWriter = new FileWriter(_destinationPath);
+
     ArrayList<Coordinate> expectedValues = createExpectedCordinateList();
     StringBuilder stringBuilder = new StringBuilder();
 
@@ -43,7 +49,7 @@ public class QualityResultSink extends Sink<ArrayList<QualityData>> {
           isInTolerance(qualityData.get_centroid(), expectedValues.get(i-2)) + "\n";
       stringBuilder.append(s);
     }
-    try {
+
       _fileWriter.write(stringBuilder.toString());
       _fileWriter.close();
     } catch (IOException e) {
@@ -129,8 +135,20 @@ public class QualityResultSink extends Sink<ArrayList<QualityData>> {
     }
   }
 
-  public void setPath(String path) throws IOException {
-    _exceptedMiddelCoordinatePath = path;
-    _fileWriter = new FileWriter(path);
+  public String get_exceptedMiddelCoordinatePath() {
+    return _exceptedMiddelCoordinatePath;
   }
+
+  public void set_exceptedMiddelCoordinatePath(String _exceptedMiddelCoordinatePath) {
+    this._exceptedMiddelCoordinatePath = _exceptedMiddelCoordinatePath;
+  }
+
+  public String get_destinationPath() {
+    return _destinationPath;
+  }
+
+  public void set_destinationPath(String _destinationPath) {
+    this._destinationPath = _destinationPath;
+  }
+
 }

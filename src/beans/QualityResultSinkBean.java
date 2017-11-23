@@ -4,7 +4,6 @@ import filters.imageFilters.QualityResultSink;
 import filters.pmp.interfaces.Readable;
 import filters.utils.QualityData;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.io.StreamCorruptedException;
@@ -15,14 +14,15 @@ import java.util.ArrayList;
  */
 public class QualityResultSinkBean implements Serializable, IDataQualityDatasChangeListener, Readable<ArrayList<QualityData>> {
 
+  private String exceptedMiddelCoordinatePath;
   private String destinationPath;
   private QualityResultSink qualityResultSink;
   private ArrayList<QualityData> qualityDataArrayList;
 
   public QualityResultSinkBean() throws IOException {
-    destinationPath = "C:\\Users\\Elisabeth\\IdeaProjects\\BeanBoxIntelliJ\\resources\\loetstellenDatenResultBean.txt";
-    FileWriter fileWriter = new FileWriter(destinationPath);
-    qualityResultSink = new QualityResultSink((filters.pmp.interfaces.Readable<ArrayList<QualityData>>) this, destinationPath, fileWriter);
+    exceptedMiddelCoordinatePath = "C:\\Users\\Elisabeth\\IdeaProjects\\BeanBoxIntelliJ\\resources\\expectedCentroids.txt";
+    qualityResultSink = new QualityResultSink((filters.pmp.interfaces.Readable<ArrayList<QualityData>>) this, exceptedMiddelCoordinatePath, destinationPath);
+    destinationPath = "C:\\Users\\Elisabeth\\IdeaProjects\\BeanBoxIntelliJ\\resources\\expectedPiscture.png";
   }
 
   @Override
@@ -40,6 +40,22 @@ public class QualityResultSinkBean implements Serializable, IDataQualityDatasCha
     throw new Exception("not implemented method");
   }
 
+  public String getExceptedMiddelCoordinatePath() {
+    return exceptedMiddelCoordinatePath;
+  }
+
+  public void setExceptedMiddelCoordinatePath(String exceptedMiddelCoordinatePath) {
+    this.exceptedMiddelCoordinatePath = exceptedMiddelCoordinatePath;
+    try {
+      qualityResultSink.set_exceptedMiddelCoordinatePath(exceptedMiddelCoordinatePath);
+      if (qualityDataArrayList != null && !qualityDataArrayList.isEmpty()) {
+        qualityResultSink.write(qualityDataArrayList);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
   public String getDestinationPath() {
     return destinationPath;
   }
@@ -47,7 +63,7 @@ public class QualityResultSinkBean implements Serializable, IDataQualityDatasCha
   public void setDestinationPath(String destinationPath) {
     this.destinationPath = destinationPath;
     try {
-      qualityResultSink.setPath(destinationPath);
+      qualityResultSink.set_destinationPath(destinationPath);
       if (qualityDataArrayList != null && !qualityDataArrayList.isEmpty()) {
         qualityResultSink.write(qualityDataArrayList);
       }
