@@ -16,7 +16,7 @@ public class ReadSourcePictureBean implements Serializable, Readable<PlanarImage
     private ReadSourcePicture readSourcePicture;
 
     public ReadSourcePictureBean() {
-        imagePath = "C:\\Users\\Elisabeth\\IdeaProjects\\BeanBoxIntelliJ\\resources\\loetstellen.jpg";
+        imagePath = System.getProperty("user.dir") +"\\loetstellen.jpg";
         listeners = new Vector();
         readSourcePicture = new ReadSourcePicture(imagePath);
     }

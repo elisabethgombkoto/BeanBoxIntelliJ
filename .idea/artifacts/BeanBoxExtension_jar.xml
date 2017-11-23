@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="BeanBoxExtension:jar">
+  <artifact type="jar" build-on-make="true" name="BeanBoxExtension:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/BeanBoxExtension_jar</output-path>
     <root id="archive" name="BeanBoxExtension.jar">
       <element id="module-output" name="BeanBoxExtension" />

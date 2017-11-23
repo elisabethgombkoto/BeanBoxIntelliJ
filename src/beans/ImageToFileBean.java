@@ -20,7 +20,7 @@ public class ImageToFileBean implements Serializable, IImageProcessListener, Rea
 
   public ImageToFileBean(){
     listeners = new Vector();
-    destinationPath = "C:\\Users\\Elisabeth\\IdeaProjects\\BeanBoxIntelliJ\\resources\\loetstellenPictureResultBean.png";
+    destinationPath = System.getProperty( "user.dir" ) + "\\loetstellenPictureResultBean.png";
     imageToFileFilter = new ImageToFileFilter(destinationPath, (filters.pmp.interfaces.Readable<PlanarImage>) this);
   }
 
